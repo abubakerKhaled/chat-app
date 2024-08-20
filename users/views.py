@@ -5,6 +5,8 @@ from django.contrib.auth.views import LoginView as AuthLoginView
 from django.contrib.auth import login
 from .forms import CustomUserCreationForm
 from django.core.exceptions import ValidationError  
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 
 class SignupView(View):
@@ -30,4 +32,21 @@ class LoginView(AuthLoginView):
     template_name = "auth-login.html"
 
     def get_success_url(self):
-        return reverse_lazy("home")  # Redirect to the homepage after login
+        return reverse_lazy("home")
+
+
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = "index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add any additional context data here
+        context["user"] = self.request.user
+        # You can add more context data as needed, for example:
+        # context['friends'] = self.request.user.friends.all()
+        # context['recent_chats'] = Chat.objects.filter(participants=self.request.user).order_by('-timestamp')[:5]
+        return context
+
+
+class ResetPassword(TemplateView):
+    template_name = "auth-recoverpw.html"
