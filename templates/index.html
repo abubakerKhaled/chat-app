@@ -13,7 +13,7 @@
         <meta content="Responsive Bootstrap 5 Chat App" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+        <link rel="icon" href="{% static 'assets/images/favicon.ico' %}">
         
         <!-- magnific-popup css -->
         <link href="{% static 'assets/libs/magnific-popup/magnific-popup.css' %}" rel="stylesheet" type="text/css" />
@@ -91,7 +91,7 @@
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile <i class="ri-profile-line float-end text-muted"></i></a>
-                                <a class="dropdown-item" href="#">Setting <i class="ri-settings-3-line float-end text-muted"></i></a>
+                                <a class="dropdown-item" href="{% url 'update_profile' %}">Setting <i class="ri-settings-3-line float-end text-muted"></i></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Log out <i class="ri-logout-circle-r-line float-end text-muted"></i></a>
                             </div>
@@ -114,7 +114,7 @@
                             </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile <i class="ri-profile-line float-end text-muted"></i></a>
-                                <a class="dropdown-item" href="#">Setting <i class="ri-settings-3-line float-end text-muted"></i></a>
+                                <a class="dropdown-item" href="{% url 'update_profile' %}">Setting <i class="ri-settings-3-line float-end text-muted"></i></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Log out <i class="ri-logout-circle-r-line float-end text-muted"></i></a>
                             </div>
@@ -152,19 +152,23 @@
 
                             <div class="text-center p-4 border-bottom">
                                 <div class="mb-4">
-                                    <img src="{% static 'assets/images/users/avatar-1.jpg' %}" class="rounded-circle avatar-lg img-thumbnail" alt="">
+                                    {% if user.profile_image %}
+                                        <img src="{{ user.profile_image.url }}" class="rounded-circle avatar-lg img-thumbnail" alt="">
+                                    {% else %}
+                                        <img src="{% static 'assets/images/users/avatar-2.jpg' %}" class="rounded-circle avatar-lg img-thumbnail" alt="">
+                                    {% endif %}
                                 </div>
-
-                                <h5 class="font-size-16 mb-1 text-truncate">{{ user.username}}</h5>
+                                {% if user.first_name|length > 0 and user.last_name|length > 0 %}
+                                    <h5 class="font-size-16 mb-1 text-truncate">{{ user.first_name }} {{ user.last_name }}</h5>
+                                {% else %}
+                                    <h5 class="font-size-16 mb-1 text-truncate">{{ user.username }}</h5>
+                                {% endif %}
                                 <p class="text-muted text-truncate mb-1"><i class="ri-record-circle-fill font-size-10 text-success me-1 ms-0 d-inline-block"></i> Active</p>
                             </div>
                             <!-- End profile user -->
 
                             <!-- Start user-profile-desc -->
                             <div class="p-4 user-profile-desc" data-simplebar>
-                                <div class="text-muted">
-                                    <p class="mb-4">If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual.</p>
-                                </div>
 
 
                                 <div id="tabprofile" class="accordion">
@@ -180,36 +184,31 @@
                                             <div class="accordion-body">
                                                 <div>
                                                     <p class="text-muted mb-1">Name</p>
-                                                    <h5 class="font-size-14">Patricia Smith</h5>
+                                                    {% if user.first_name|length > 0 and user.last_name|length > 0 %}
+                                                        <h5 class="font-size-14">{{ user.first_name }} {{ user.last_name }}</h5>
+                                                    {% else %}
+                                                        <h5 class="font-size-14">{{ user.username }}</h5>
+                                                    {% endif %}
                                                 </div>
 
                                                 <div class="mt-4">
                                                     <p class="text-muted mb-1">Email</p>
-                                                    <h5 class="font-size-14">adc@123.com</h5>
+                                                    {% if user.email %}
+                                                    <h5 class="font-size-14">{{ user.email }}</h5>
+                                                    {% endif %}
                                                 </div>
 
                                                 <div class="mt-4">
                                                     <p class="text-muted mb-1">Time</p>
-                                                    <h5 class="font-size-14">11:40 AM</h5>
+                                                    <h5 class="font-size-14">{{ user.last_login }}</h5>
                                                 </div>
 
-                                                <div class="mt-4">
-                                                    <p class="text-muted mb-1">Location</p>
-                                                    <h5 class="font-size-14 mb-0">California, USA</h5>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- End About card -->
 
                                     <div class="card accordion-item border">
-                                        <div class="accordion-header" id="attachfile2">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#attachfile" aria-expanded="false" aria-controls="attachfile">
-                                                <h5 class="font-size-14 m-0">
-                                                    <i class="ri-attachment-line me-2 ms-0 ms-0 align-middle d-inline-block"></i> Attached Files
-                                                </h5>
-                                            </button>
-                                        </div>
                                         <div id="attachfile" class="accordion-collapse collapse" aria-labelledby="attachfile2" data-bs-parent="#tabprofile">
                                             <div class="accordion-body">
                                                 <div class="card p-2 border mb-2">

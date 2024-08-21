@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "friends",
     "rooms",
     "search",
+    "settings",
 ]
 
 MIDDLEWARE = [

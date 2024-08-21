@@ -1,4 +1,3 @@
-from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -7,9 +6,11 @@ from django.utils.encoding import force_bytes
 from django.urls import reverse_lazy
 from django.contrib.auth.tokens import default_token_generator
 from django.shortcuts import render, redirect
-from .forms import PasswordResetRequestForm
+from .forms import PasswordResetRequestForm, UserProfileUpdateForm
 from django.views import View
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+
 
 
 class PasswordResetView(View):
@@ -47,3 +48,15 @@ class PasswordResetView(View):
                     )
             return redirect("password_reset_done")
         return render(request, "auth-recoverpw.html", {"form": form})
+
+
+@login_required
+def update_profile(request):
+    if request.method == "POST":
+        form = UserProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("home")  # Redirect to the profile page after updating
+    else:
+        form = UserProfileUpdateForm(instance=request.user)
+    return render(request, "update_profile.html", {"form": form})

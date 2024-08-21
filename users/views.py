@@ -58,14 +58,3 @@ class CustomLogoutView(View):
         return redirect("login")  # Redirect to the login page
 
 
-# TODO: make the update profile template and view and urls work
-# @login_required
-# def update_profile(request):
-#     if request.method == "POST":
-#         form = UserProfileUpdateForm(request.POST, request.FILES, instance=request.user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("profile")  # Redirect to the profile page after updating
-#     else:
-#         form = UserProfileUpdateForm(instance=request.user)
-#     return render(request, "users/update_profile.html", {"form": form})
