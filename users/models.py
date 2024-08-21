@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+from django import forms
 
 
 class CustomUserManager(BaseUserManager):
@@ -47,3 +48,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+#TODO: create the update profile logic.
+# class UserProfileUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = CustomUser
+#         fields = [
+#             "username",
+#             "email",
+#             "profile_picture",
+#         ]  # Include any other fields you want to allow updates on

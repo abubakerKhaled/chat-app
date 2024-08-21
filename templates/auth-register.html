@@ -2,155 +2,142 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Mirrored from themesbrand.com/chatvia/layouts/auth-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 22:07:38 GMT -->
-  <head>
-    <meta charset="utf-8" />
-    <title>Register</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta content="Responsive Bootstrap 5 Chat App" name="description" />
-    <meta content="Themesbrand" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+<head>
+  <meta charset="utf-8" />
+  <title>Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="Responsive Bootstrap 5 Chat App" name="description" />
+  <meta content="Themesbrand" name="author" />
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
 
-    <!-- Bootstrap Css -->
-    <link
-      href="{% static 'assets/css/bootstrap.min.css' %}"
-      id="bootstrap-style"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- Icons Css -->
-    <link
-      href="{% static 'assets/css/icons.min.css' %}"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- App Css-->
-    <link
-      href="{% static 'assets/css/app.min.css' %}"
-      id="app-style"
-      rel="stylesheet"
-      type="text/css"
-    />
-  </head>
+  <!-- Bootstrap Css -->
+  <link href="{% static 'assets/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+  <!-- Icons Css -->
+  <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+  <!-- App Css-->
+  <link href="{% static 'assets/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+</head>
 
-  <body>
-    <div class="account-pages my-5 pt-sm-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8 col-lg-6 col-xl-5">
-            <div class="text-center mb-4">
-              <a href="index.html" class="auth-logo mb-5 d-block">
-                <img
-                  src="{% static 'assets/images/logo-dark.png' %}"
-                  alt=""
-                  height="30"
-                  class="logo logo-dark"
-                />
-                <img
-                  src="{% static 'assets/images/logo-light.png' %}"
-                  alt=""
-                  height="30"
-                  class="logo logo-light"
-                />
-              </a>
+<body>
+  <div class="account-pages my-5 pt-sm-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+          <div class="text-center mb-4">
+            <a href="index.html" class="auth-logo mb-5 d-block">
+              <img src="{% static 'assets/images/logo-dark.png' %}" alt="" height="30" class="logo logo-dark" />
+              <img src="{% static 'assets/images/logo-light.png' %}" alt="" height="30" class="logo logo-light" />
+            </a>
 
-              <h4>Sign up</h4>
-              <p class="text-muted mb-4">Get your Chatvia account now.</p>
-            </div>
+            <h4>Sign up</h4>
+            <p class="text-muted mb-4">Get your Chatvia account now.</p>
+          </div>
 
-            <div class="card">
-              <div class="card-body p-4">
-                <div class="p-3">
-                  <form action="" method="POST">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                      <label class="form-label">Email</label>
-                      <div class="input-group bg-light-subtle rounded-3 mb-3">
-                        <span
-                          class="input-group-text text-muted"
-                          id="basic-addon5"
-                        >
-                          <i class="ri-mail-line"></i>
-                        </span>
-                        {{ form.email }}
+          <div class="card">
+            <div class="card-body p-4">
+              <div class="p-3">
+                <form action="" method="POST">
+                  {% csrf_token %}
+                  <!-- Display non-field-specific errors -->
+                  {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                      {{ form.non_field_errors }}
+                    </div>
+                  {% endif %}
+                  
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <div class="input-group bg-light-subtle rounded-3 mb-3">
+                      <span class="input-group-text text-muted" id="basic-addon5">
+                        <i class="ri-mail-line"></i>
+                      </span>
+                      {{ form.email }}
+                    </div>
+                    <!-- Display email errors -->
+                    {% if form.email.errors %}
+                      <div class="text-danger">
+                        {{ form.email.errors }}
                       </div>
-                    </div>
+                    {% endif %}
+                  </div>
 
-                    <div class="mb-3">
-                      <label class="form-label">Username</label>
-                      <div class="input-group bg-light-subtle mb-3 rounded-3">
-                        <span
-                          class="input-group-text border-light text-muted"
-                          id="basic-addon6"
-                        >
-                          <i class="ri-user-2-line"></i>
-                        </span>
-                        {{ form.username }}
+                  <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <div class="input-group bg-light-subtle mb-3 rounded-3">
+                      <span class="input-group-text border-light text-muted" id="basic-addon6">
+                        <i class="ri-user-2-line"></i>
+                      </span>
+                      {{ form.username }}
+                    </div>
+                    <!-- Display username errors -->
+                    {% if form.username.errors %}
+                      <div class="text-danger">
+                        {{ form.username.errors }}
                       </div>
-                    </div>
+                    {% endif %}
+                  </div>
 
-                    <div class="mb-4">
-                      <label class="form-label">Password</label>
-                      <div class="input-group bg-light-subtle mb-3 rounded-3">
-                        <span
-                          class="input-group-text border-light text-muted"
-                          id="basic-addon7"
-                        >
-                          <i class="ri-lock-2-line"></i>
-                        </span>
-                        {{ form.password1 }}
+                  <div class="mb-4">
+                    <label class="form-label">Password</label>
+                    <div class="input-group bg-light-subtle mb-3 rounded-3">
+                      <span class="input-group-text border-light text-muted" id="basic-addon7">
+                        <i class="ri-lock-2-line"></i>
+                      </span>
+                      {{ form.password1 }}
+                    </div>
+                    <!-- Display password1 errors -->
+                    {% if form.password1.errors %}
+                      <div class="text-danger">
+                        {{ form.password1.errors }}
                       </div>
-                    </div>
+                    {% endif %}
+                  </div>
 
-                    <div class="mb-4">
-                      <label class="form-label">Repeat Password</label>
-                      <div class="input-group bg-light-subtle mb-3 rounded-3">
-                        <span
-                          class="input-group-text border-light text-muted"
-                          id="basic-addon7"
-                        >
-                          <i class="ri-lock-2-line"></i>
-                        </span>
-                        {{ form.password2 }}
+                  <div class="mb-4">
+                    <label class="form-label">Repeat Password</label>
+                    <div class="input-group bg-light-subtle mb-3 rounded-3">
+                      <span class="input-group-text border-light text-muted" id="basic-addon7">
+                        <i class="ri-lock-2-line"></i>
+                      </span>
+                      {{ form.password2 }}
+                    </div>
+                    <!-- Display password2 errors -->
+                    {% if form.password2.errors %}
+                      <div class="text-danger">
+                        {{ form.password2.errors }}
                       </div>
-                    </div>
+                    {% endif %}
+                  </div>
 
-                    <div class="d-grid">
-                      <button
-                        class="btn btn-primary waves-effect waves-light"
-                        type="submit"
-                      >
-                        Sign up
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                  <div class="d-grid">
+                    <button class="btn btn-primary waves-effect waves-light" type="submit">
+                      Sign up
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
+          </div>
 
-            <div class="mt-5 text-center">
-              <p>
-                Already have an account ?
-                <a href="{% url 'login' %}" class="fw-medium text-primary">
-                  Signin
-                </a>
-              </p>
-            </div>
+          <div class="mt-5 text-center">
+            <p>
+              Already have an account ?
+              <a href="{% url 'login' %}" class="fw-medium text-primary">
+                Signin
+              </a>
+            </p>
           </div>
         </div>
       </div>
     </div>
-    <!-- end account-pages -->
+  </div>
 
-    <!-- JAVASCRIPT -->
-    <script src="{% static 'assets/libs/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
-    <script src="{% static 'assets/libs/node-waves/waves.min.js' %}"></script>
+  <!-- JAVASCRIPT -->
+  <script src="{% static 'assets/libs/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+  <script src="{% static 'assets/libs/node-waves/waves.min.js' %}"></script>
 
-    <script src="{% static 'assets/js/app.js' %}"></script>
-  </body>
-
-  <!-- Mirrored from themesbrand.com/chatvia/layouts/auth-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 Aug 2024 22:07:38 GMT -->
+  <script src="{% static 'assets/js/app.js' %}"></script>
+</body>
 </html>

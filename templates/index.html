@@ -93,7 +93,7 @@
                                 <a class="dropdown-item" href="#">Profile <i class="ri-profile-line float-end text-muted"></i></a>
                                 <a class="dropdown-item" href="#">Setting <i class="ri-settings-3-line float-end text-muted"></i></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Log out <i class="ri-logout-circle-r-line float-end text-muted"></i></a>
+                                <a class="dropdown-item" href="{% url 'logout' %}">Log out <i class="ri-logout-circle-r-line float-end text-muted"></i></a>
                             </div>
                         </li>
                     </ul>
@@ -116,7 +116,7 @@
                                 <a class="dropdown-item" href="#">Profile <i class="ri-profile-line float-end text-muted"></i></a>
                                 <a class="dropdown-item" href="#">Setting <i class="ri-settings-3-line float-end text-muted"></i></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="auth-login.html">Log out <i class="ri-logout-circle-r-line float-end text-muted"></i></a>
+                                <a class="dropdown-item" href="{% url 'logout' %}">Log out <i class="ri-logout-circle-r-line float-end text-muted"></i></a>
                             </div>
                         </li>
                     </ul>
@@ -461,6 +461,8 @@
                                 <div class="chat-message-list px-2" data-simplebar>
             
                                     <ul class="list-unstyled chat-list chat-user-list">
+
+
                                         <li>
                                             <a href="#">
                                                 <div class="d-flex">                            
@@ -478,7 +480,7 @@
                                             </a>
                                         </li>
     
-                                        <li class="unread">
+                                        {% comment %} <li class="unread">
                                             <a href="#">
                                                 <div class="d-flex">
                                                     <div class="chat-user-img away align-self-center me-3 ms-0">
@@ -495,7 +497,7 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                        </li>
+                                        </li> {% endcomment %}
     
                                         <li>
                                             <a href="#">
@@ -516,7 +518,7 @@
                                             </a>
                                         </li>
     
-                                        <li class="active">
+                                        {% comment %} <li class="active">
                                             <a href="#">
                                                 <div class="d-flex">
                                                     <div class="chat-user-img online align-self-center me-3 ms-0">
@@ -530,8 +532,10 @@
                                                     <div class="font-size-11">10:12 AM</div>
                                                 </div>
                                             </a>
-                                        </li>
-                                        <li class="unread">
+                                        </li> {% endcomment %}
+
+
+                                        {% comment %} <li class="unread">
                                             <a href="#">
                                                 <div class="d-flex">
                                                     <div class="chat-user-img align-self-center me-3 ms-0">
@@ -551,8 +555,10 @@
                                                     </div>
                                                 </div>                            
                                             </a>
-                                        </li>
-                                        <li>
+                                        </li> {% endcomment %}
+
+
+                                        {% comment %} <li>
                                             <a href="#">                        
                                                 <div class="d-flex">
                                                     <div class="chat-user-img away align-self-center me-3 ms-0">
@@ -566,8 +572,10 @@
                                                     <div class="font-size-11">03:20 PM</div>
                                                 </div>                        
                                             </a>
-                                        </li>
-                                        <li class="typing">
+                                        </li> {% endcomment %}
+
+
+                                        {% comment %} <li class="typing">
                                             <a href="#">                        
                                                 <div class="d-flex">
                                                     <div class="chat-user-img align-self-center online me-3 ms-0">
@@ -589,9 +597,9 @@
                                                     <div class="font-size-11">04:56 PM</div>
                                                 </div>  
                                             </a>
-                                        </li>
+                                        </li> {% endcomment %}
 
-                                        <li>
+                                        {% comment %} <li>
                                             <a href="#">
                                                 <div class="d-flex">
                                                     <div class="chat-user-img align-self-center online me-3 ms-0">
@@ -609,7 +617,9 @@
                                                     <div class="font-size-11">12/07</div>
                                                 </div>
                                             </a>
-                                        </li>
+                                        </li> {% endcomment %}
+
+{% comment %} 
                                         <li>
                                             <a href="#">
                                                 <div class="d-flex">
@@ -624,7 +634,9 @@
                                                     <div class="font-size-11">12/07</div>
                                                 </div>
                                             </a>
-                                        </li>
+                                        </li> {% endcomment %}
+
+{% comment %} 
                                         <li>
                                             <a href="#">
                                                 <div class="d-flex">
@@ -643,7 +655,9 @@
                                                     <div class="font-size-11">12/07</div>
                                                 </div>
                                             </a>
-                                        </li>
+                                        </li> {% endcomment %}
+
+{% comment %} 
                                         <li>
                                             <a href="#">
                                                 <div class="d-flex">
@@ -658,8 +672,10 @@
                                                     <div class="font-size-11">11/07</div>                                                       
                                                 </div>
                                             </a>
-                                        </li>
-                                        <li>
+                                        </li> {% endcomment %}
+
+
+                                        {% comment %} <li>
                                             <a href="#">
                                                 <div class="d-flex">
                                                     <div class="chat-user-img align-self-center online me-3 ms-0">
@@ -677,7 +693,9 @@
                                                     <div class="font-size-11">11/07</div>
                                                 </div>
                                             </a>
-                                        </li>
+                                        </li> {% endcomment %}
+
+
                                     </ul>
                                 </div>
                             </div>
