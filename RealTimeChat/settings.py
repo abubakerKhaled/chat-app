@@ -149,6 +149,7 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 
 LOGIN_URL = "/users/login/"
+LOGIN_REDIRECT_URL = "/"
 
 
 # Default primary key field type

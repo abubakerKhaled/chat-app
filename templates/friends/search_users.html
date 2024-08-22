@@ -1,0 +1,135 @@
+{% load static %} {% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Search Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="Responsive Bootstrap 5 Chat App" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" />
+    <link
+      href="{% static 'assets/css/bootstrap.min.css' %}"
+      id="bootstrap-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'assets/css/icons.min.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'assets/css/app.min.css' %}"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <div class="account-pages my-5 pt-sm-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="text-center mb-4">
+              <a href="{% url 'home' %}" class="auth-logo mb-5 d-block">
+                <img
+                  src="{% static 'assets/images/logo-dark.png' %}"
+                  alt=""
+                  height="30"
+                  class="logo logo-dark"
+                />
+                <img
+                  src="{% static 'assets/images/logo-light.png' %}"
+                  alt=""
+                  height="30"
+                  class="logo logo-light"
+                />
+              </a>
+
+              <h4>Search Users</h4>
+              <p class="text-muted mb-4">Find users by username or email.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-body p-4">
+                <div class="p-3">
+                  <form method="get" action="{% url 'friends:search_users' %}">
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        name="query"
+                        class="form-control form-control-lg border-light bg-light-subtle"
+                        placeholder="Search by username or email"
+                        aria-label="Search"
+                        aria-describedby="basic-addon1"
+                        value="{{ query }}"
+                      />
+                      <button
+                        class="btn btn-primary"
+                        type="submit"
+                        id="basic-addon1"
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </form>
+
+                  {% if query %}
+                  <h5>Search Results for "{{ query }}"</h5>
+                  {% if results %}
+                  <ul class="list-group">
+                    {% for user in results %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <div>
+                        {% if user.profile_image %}
+                        <img
+                          src="{{ user.profile_image.url }}"
+                          class="rounded-circle avatar-sm img-thumbnail me-2"
+                          alt=""
+                        />
+                        {% else %}
+                        <img
+                          src="{% static 'assets/images/users/avatar-2.jpg' %}"
+                          class="rounded-circle avatar-sm img-thumbnail me-2"
+                          alt=""
+                        />
+                        {% endif %}
+                        <strong>{{ user.first_name }} {{ user.last_name }}</strong>
+                        <span class="text-muted d-block">@{{ user.username }}</span>
+                      </div>
+                      <form method="post" action="{% url 'friends:send_friend_request' user.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-success">Add Friend</button>
+                      </form>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% else %}
+                  <p class="text-muted">No users found.</p>
+                  {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5 text-center">
+              <p>
+                <a href="{% url 'home' %}" class="fw-medium text-primary"
+                  >Back to Home</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'assets/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'assets/libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.js' %}"></script>
+  </body>
+</html>

@@ -39,6 +39,12 @@ class LoginView(AuthLoginView):
         return reverse_lazy("home")
 
 
+@login_required
+def home(request):
+    return render(request, "index.html")
+
+
+
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "index.html"
 
@@ -56,5 +62,3 @@ class CustomLogoutView(View):
     def get(self, request):
         logout(request)  # Log the user out
         return redirect("login")  # Redirect to the login page
-
-

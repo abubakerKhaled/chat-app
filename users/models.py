@@ -40,6 +40,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         choices=[("active", "Active"), ("busy", "Busy")],
         default="active",
     )
+    friends = models.ManyToManyField("self", blank=True, symmetrical=False)
 
     objects = CustomUserManager()
 
@@ -50,12 +51,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-#TODO: create the update profile logic.
-# class UserProfileUpdateForm(forms.ModelForm):
-#     class Meta:
-#         model = CustomUser
-#         fields = [
-#             "username",
-#             "email",
-#             "profile_picture",
-#         ]  # Include any other fields you want to allow updates on
